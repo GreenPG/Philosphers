@@ -6,7 +6,7 @@
 #    By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/14 16:30:04 by gpasquet          #+#    #+#              #
-#    Updated: 2023/02/14 16:30:46 by gpasquet         ###   ########.fr        #
+#    Updated: 2023/02/16 12:56:15 by gpasquet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,12 @@ CFLAGS =	-g -Werror -Wextra -Wall -I./includes
 
 NAME =	philo	
 
-SRC =	srcs/main.c \
+SRCS =	srcs/main.c \
+		srcs/args_functions.c \
+		srcs/utils.c \
+		srcs/free_functions.c
 
-OBJ =	${SRC:.c=.o}
+OBJS =	${SRCS:.c=.o}
 
 all:	${NAME}
 
@@ -26,8 +29,8 @@ all:	${NAME}
 	@printf "Compiling .c to .o \r"
 	@${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 	
-$(NAME): ${OBJ}
-	@${CC} ${CFLAGS} ${OBJ} -o ${NAME} 
+$(NAME): ${OBJS}
+	@${CC} ${CFLAGS} ${OBJS} -o ${NAME} 
 	@printf '\e[1;37m%-6s\e[m' "Compilation complete"
 
 clean:
@@ -55,3 +58,5 @@ fclean:	clean
 re:	fclean all
 
 .PHONY:	all clean fclean re 
+
+-include test.mk

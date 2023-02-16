@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   runner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 16:41:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/16 12:55:52 by gpasquet         ###   ########.fr       */
+/*   Created: 2023/02/15 10:54:33 by gpasquet          #+#    #+#             */
+/*   Updated: 2023/02/16 11:29:17 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "../greatest/greatest.h"
 
-# include <unistd.h>
-# include <stdlib.h>
+extern	SUITE(check_args_suite);
+extern	SUITE(get_args_suite);
 
-typedef struct s_args{
-	int	*tab;
-	int	args_nb;
-}	t_args;
+GREATEST_MAIN_DEFS();
 
-/*	args_functions.c	*/
+int	main(int argc, char **argv)
+{
+	GREATEST_MAIN_BEGIN();
 
-int		check_args(int ac, char **av);
-t_args	*get_args(int ac, char **av);
+	RUN_SUITE(check_args_suite);
+	RUN_SUITE(get_args_suite);
 
-/*	utils.c				*/
-
-int	ft_atoi(const char *nptr);
-size_t	ft_strlen(const char *s);
-
-/*	free_functions.c	*/
-
-void	free_args(t_args *args);
-
-#endif
+	GREATEST_MAIN_END();
+}
