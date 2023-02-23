@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:41:42 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/16 12:48:56 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/02/22 15:55:01 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,27 @@ TEST	long_input(void)
 	PASS();
 }
 
+TEST	negative_input(void)
+{
+	char	*input1[4] = {"-4", "1000", "300", "500"};
+	char	*input2[4] = {"4", "-1000", "300", "500"};
+	char	*input3[4] = {"4", "1000", "-300", "500"};
+	char	*input4[4] = {"4", "1000", "300", "-500"};
+	char	*input5[5] = {"4", "1000", "300", "500", "-10"};
+
+	ASSERT_EQ_FMT(-1, check_args(4, input1), "%i");
+	ASSERT_EQ_FMT(-1, check_args(4, input2), "%i");
+	ASSERT_EQ_FMT(-1, check_args(4, input3), "%i");
+	ASSERT_EQ_FMT(-1, check_args(4, input4), "%i");
+	ASSERT_EQ_FMT(-1, check_args(5, input5), "%i");
+	PASS();
+}
+
 SUITE(check_args_suite) {
 	RUN_TEST(only_digits);
 	RUN_TEST(only_nondigits);
 	RUN_TEST(digits_and_nondigits);
 	RUN_TEST(wrong_ac);
 	RUN_TEST(long_input);
+	RUN_TEST(negative_input);
 }

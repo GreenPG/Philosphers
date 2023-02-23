@@ -6,13 +6,13 @@
 #    By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/14 16:30:04 by gpasquet          #+#    #+#              #
-#    Updated: 2023/02/16 12:56:15 by gpasquet         ###   ########.fr        #
+#    Updated: 2023/02/16 16:39:33 by gpasquet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC =	clang
 
-CFLAGS =	-g -Werror -Wextra -Wall -I./includes 
+CFLAGS =	-fsanitize=thread -g -Werror -Wextra -Wall -pthread -I./includes 
 
 NAME =	philo	
 
@@ -35,7 +35,7 @@ $(NAME): ${OBJS}
 
 clean:
 	@n=1; \
-	for file in $(OBJ); do \
+	for file in $(OBJS); do \
 		if test -e $$file; then \
 			if [ $$n -eq 1 ]; then \
 				printf "Cleaning .o files \n"; \

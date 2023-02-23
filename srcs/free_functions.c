@@ -6,17 +6,10 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:53:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/16 12:54:58 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/02/22 15:49:18 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-void	free_args(t_args *args)
-{
-	if (!args)
-		return ;
-	if (args->tab)
-		free(args->tab);
-	free(args);
-}
+
