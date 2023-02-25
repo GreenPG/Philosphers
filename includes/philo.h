@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:41:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/23 16:28:18 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/02/25 11:13:07 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ t_philo	**init_philos(char **av, int ac);
 
 /*	utils.c				*/
 
-int	ft_atoi(const char *nptr);
+int		ft_atoi(const char *nptr);
 size_t	ft_strlen(const char *s);
 
 /*	free_functions.c	*/
 
+void	free_forks(t_forks **forks);
+void	free_philos(t_philo **philos);
 
 #endif

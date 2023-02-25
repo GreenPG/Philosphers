@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:38:33 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/23 17:30:27 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/02/25 09:37:09 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ t_forks	*init_forks(char *input)
 t_philo	**init_philos(char **av, int ac)
 {
 	t_philo	**philos;
-	t_forks *forks;
+	t_forks	*forks;
 	int		i;
 
 	if (!av || ac < 4 || ac > 5)

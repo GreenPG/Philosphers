@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:54:33 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/23 16:25:03 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/02/25 10:01:49 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 extern	SUITE(check_args_suite);
 extern	SUITE(init_forks_suite);
 extern	SUITE(init_philos_suite);
+extern	SUITE(free_forks_suite);
 
 GREATEST_MAIN_DEFS();
 
@@ -25,6 +26,6 @@ int	main(int argc, char **argv)
 	RUN_SUITE(check_args_suite);
 	RUN_SUITE(init_forks_suite);
 	RUN_SUITE(init_philos_suite);
-
+	RUN_SUITE(free_forks_suite);
 	GREATEST_MAIN_END();
 }
