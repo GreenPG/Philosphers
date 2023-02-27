@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:21:20 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/25 09:40:57 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:01:01 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ TEST	ASSERT_FORKS_EQ(t_forks *actual, t_forks *expected, int size)
 		ASSERT_EQ_FMT(actual->tab[i], 0, "%i");
 		i++;
 	}
+	free_forks(&actual);
 	PASS();
 }
 
@@ -41,10 +42,8 @@ TEST	simple_input(void)
 	t_forks	exp1 = {.philo_nb = 4};
 	t_forks	exp2 = {.philo_nb = 1};
 
-	init_forks(ipt1);
 	CHECK_CALL(ASSERT_FORKS_EQ(init_forks(ipt1), &exp1, 4));
-	init_forks(ipt2);
-	CHECK_CALL(ASSERT_FORKS_EQ(init_forks(ipt2), &exp2, 4));
+	CHECK_CALL(ASSERT_FORKS_EQ(init_forks(ipt2), &exp2, 1));
 	ASSERT_EQ_FMT(NULL, init_forks(ipt3), "%p");
 	ASSERT_EQ_FMT(NULL, init_forks(ipt4), "%p");
 	ASSERT_EQ_FMT(NULL, init_forks(NULL), "%p");

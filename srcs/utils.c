@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:25:36 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/16 12:39:34 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:08:08 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,17 @@ int	ft_atoi(const char *nptr)
 	}
 	ret *= sign;
 	return (ret);
+}
+
+struct timeval	get_set_starttime(int par)
+{
+	static struct timeval	start_time;
+
+	if (par == 0)
+	{
+		gettimeofday(&start_time, NULL);
+		return (start_time);
+	}
+	else
+		return (start_time);
 }

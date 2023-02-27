@@ -6,7 +6,7 @@
 #    By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 11:03:28 by gpasquet          #+#    #+#              #
-#    Updated: 2023/02/20 13:00:55 by gpasquet         ###   ########.fr        #
+#    Updated: 2023/02/25 16:00:15 by gpasquet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,10 @@ TOBJS =	$(TSRCS:%.c=%.o)
 
 ##########################	CMDS	############################################
 
-#test: VALGRIND :=	valgrind \
+test: VALGRIND :=	valgrind \
 									--quiet					\
 									--leak-check=full		\
+									--show-leak-kinds=all	\
 									--error-exitcode=1 	\
 
 test: test.build

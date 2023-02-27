@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:53:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/25 11:25:51 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/02/25 15:49:11 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,31 @@ void	free_forks(t_forks **forks)
 	if (!forks || !*forks)
 		return ;
 	tmp = *forks;
-	s_free(tmp->tab);
+	if (tmp->tab)
+		free(tmp->tab);
 	free(*forks);
 	*forks = NULL;
+	tmp = NULL;
 }
 
-void	free_philos()
+void	free_philos(t_philo ***philos)
 {
+	t_philo	**tmp;
+	int		i;
+	int		len;
 
+	if (!philos | !*philos)
+		return ;
+	tmp = *philos;
+	len = tmp[0]->forks->philo_nb;
+	free_forks(&tmp[0]->forks);
+	i = 0;
+	while (i < len)
+	{
+		free(tmp[i]);
+		tmp[i] = NULL;
+		i++;
+	}
+	free(*philos);
+	*philos = NULL;
 }

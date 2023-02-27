@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:40:33 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/23 17:27:23 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:28:52 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ TEST	ASSERT_PHILOS_EQ(t_philo **actual, char **args, int size)
 		ASSERT_EQ_FMT(ft_atoi(args[1]), actual[pos]->t_die, "%i");
 		ASSERT_EQ_FMT(ft_atoi(args[2]), actual[pos]->t_eat, "%i");
 		ASSERT_EQ_FMT(ft_atoi(args[3]), actual[pos]->t_sleep, "%i");
+		ASSERT_EQ_FMT(start, actual[pos]->state, "%i");
 		if (size == 5)
 			ASSERT_EQ_FMT(ft_atoi(args[4]), actual[pos]->nb_eat, "%i");
 		ASSERT_EQ_FMT(ft_atoi(args[0]), actual[pos]->forks->philo_nb, "%i");
@@ -37,6 +38,7 @@ TEST	ASSERT_PHILOS_EQ(t_philo **actual, char **args, int size)
 		}
 		pos++;
 	}
+	free_philos(&actual);
 	PASS();
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -48,7 +50,7 @@ TEST	simple_input(void)
 	char	*args2[5] = {"4", "323", "3123", "321", "43"};
 
 	CHECK_CALL(ASSERT_PHILOS_EQ(init_philos(args1, 4), args1, 4));
-	CHECK_CALL(ASSERT_PHILOS_EQ(init_philos(args2, 5), args2, 5));
+	CHECK_CALL(ASSERT_PHILOS_EQ(init_philos(args2, 5), args2, 4));
 	PASS();
 }
 ///////////////////////////////////////////////////////////////////////////////
