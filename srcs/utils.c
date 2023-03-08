@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:25:36 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/07 16:53:38 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/08 12:55:05 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,20 @@ int	ft_atoi(const char *nptr)
 	return (ret);
 }
 
-long long	get_set_time(int par)
+long long	get_set_time(int par, t_philo *ph_data)
 {
 	struct timeval			tmval;
-	static struct timeval	*start_time;
-	static pthread_mutex_t	mutex;
+	static struct timeval	start_time;
+	long long	time;
 
-	pthread_mutex_init(&mutex, NULL);
-	if (par == 0)
+	(void)ph_data;
+	if (par <= 1)
 	{
-		pthread_mutex_lock(&mutex);
-		if (!start_time)
-		{
-			start_time = malloc(sizeof(struct timeval));
-			gettimeofday(start_time, NULL);
-		}
-		pthread_mutex_unlock(&mutex);
-		return (start_time->tv_sec * 1000 + start_time->tv_usec / 1000);
+		if (par == 0)
+			gettimeofday(&start_time, NULL);
+		return (0);
 	}
-	pthread_mutex_lock(&mutex);
 	gettimeofday(&tmval, NULL);
-	pthread_mutex_unlock(&mutex);
-	return (tmval.tv_sec * 1000 + tmval.tv_usec / 1000);
+	time = (tmval.tv_sec - start_time.tv_sec) * 1000 + (tmval.tv_usec - start_time.tv_usec) / 1000;
+	return (time);
 }

@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 15:24:17 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/25 15:24:46 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/08 16:13:51 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ static int	check_args_size(int ac, char **av)
 	i = 0;
 	while (i < ac)
 	{
-		if (ft_strlen(av[i]) > 10)
+		if (ft_strlen(av[i]) > 10 || ft_atoi(av[i]) < 0)
+		{
+			printf("Parameters %i is superior to int max\n", i);
 			return (-1);
+		}
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 11:29:26 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/25 15:57:04 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/08 16:50:57 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,19 @@ TEST	full_tab(void)	{
 	ipt1[1] = "300";
 	ipt1[2] = "300";
 	ipt1[3] = "300";
-	t_philo **p1 = init_philos(ipt1, 4); 
+	t_forks *f1 = init_forks("4");
+	t_philo **p1 = init_philos(ipt1, 4, f1); 
 	char	**ipt2 = malloc(sizeof(char *) * 6);
 	ipt2[0] = "4";
 	ipt2[1] = "300";
 	ipt2[2] = "300";
 	ipt2[3] = "300";
 	ipt2[4] = "300";
-	t_philo **p2 = init_philos(ipt2, 5); 
+	t_philo **p2 = init_philos(ipt2, 5, f1); 
 
-	free_philos(&p1);
+	free_philos(&p1, 4);
 	ASSERT_EQ_FMT(NULL, p1, "%p");
-	free_philos(&p2);
+	free_philos(&p2, 4);
 	ASSERT_EQ_FMT(NULL, p2, "%p");
 	free(ipt1);
 	free(ipt2);
@@ -46,7 +47,7 @@ TEST	full_tab(void)	{
 TEST	empty_pointer(void) {
 	t_philo **p1 = NULL;
 
-	free_philos(&p1);
+	free_philos(&p1, 4);
 	ASSERT_EQ_FMT(NULL, p1, "%p");
 	PASS();
 }

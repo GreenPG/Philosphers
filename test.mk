@@ -6,7 +6,7 @@
 #    By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 11:03:28 by gpasquet          #+#    #+#              #
-#    Updated: 2023/03/07 09:26:36 by gpasquet         ###   ########.fr        #
+#    Updated: 2023/03/08 13:02:19 by gpasquet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,16 @@ test.build:
 	$(MAKE) -s --jobs=8 $(TRUNNER)
 
 test.clean:
-	@rm unit_tests/*.o
+	@n=1; \
+	for file in $(TOBJS); do \
+		if test -e $$file; then \
+			if [ $$n -eq 1 ]; then \
+				printf "Cleaning test .o files \n"; \
+			fi; \
+			n=$$((n + 1)); \
+			rm $$file; \
+		fi \
+	done
 	@rm -rf $(NAME)
 	@rm -rf $(TRUNNER)
 

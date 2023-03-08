@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:54:33 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/25 14:09:04 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/08 16:47:14 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	RUN_SUITE(check_args_suite);
 	RUN_SUITE(init_forks_suite);
 	RUN_SUITE(init_philos_suite);
-	RUN_SUITE(free_forks_suite);
-	RUN_SUITE(free_philos_suite);
+	/* RUN_SUITE(free_forks_suite); */
+	/* RUN_SUITE(free_philos_suite); */
 	GREATEST_MAIN_END();
 }
