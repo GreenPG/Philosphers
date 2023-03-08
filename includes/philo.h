@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:41:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/27 14:28:29 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:06:38 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 typedef enum e_state {start ,sleeping, thinking, eating, dead}	t_state;
 
 typedef struct s_forks {
-	int	philo_nb;
-	int	*tab;
+	int				philo_nb;
+	pthread_mutex_t	*tab;
 }	t_forks;
 
 typedef struct s_philo {
@@ -49,7 +49,7 @@ int				check_args(int ac, char **av);
 
 int				ft_atoi(const char *nptr);
 size_t			ft_strlen(const char *s);
-struct timeval	get_set_starttime(int par);
+long long		get_set_time(int par);
 
 /*	free_functions.c	*/
 

@@ -6,11 +6,12 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:40:33 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/27 14:28:52 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:31:33 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
+#include <pthread.h>
 #include "../greatest/greatest.h"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -33,7 +34,8 @@ TEST	ASSERT_PHILOS_EQ(t_philo **actual, char **args, int size)
 		ASSERT_EQ_FMT(ft_atoi(args[0]), actual[pos]->forks->philo_nb, "%i");
 		while (i < actual[pos]->forks->philo_nb)
 		{
-			ASSERT_EQ_FMT(0, actual[pos]->forks->tab[i], "%i");
+			ASSERT_EQ_FMT(0, pthread_mutex_lock(&actual[pos]->forks->tab[i]), "%i");
+			pthread_mutex_unlock(&actual[pos]->forks->tab[i]);
 			i++;
 		}
 		pos++;

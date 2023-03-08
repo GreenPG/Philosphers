@@ -6,11 +6,12 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:21:20 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/25 16:01:01 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:59:16 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
+#include <pthread.h>
 #include "../greatest/greatest.h"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -23,7 +24,8 @@ TEST	ASSERT_FORKS_EQ(t_forks *actual, t_forks *expected, int size)
 	ASSERT_EQ_FMT(actual->philo_nb, expected->philo_nb, "%i");
 	while (i < size)
 	{
-		ASSERT_EQ_FMT(actual->tab[i], 0, "%i");
+		ASSERT_EQ_FMT(pthread_mutex_lock(&actual->tab[i]), 0, "%i");
+		pthread_mutex_unlock(&actual->tab[i]);
 		i++;
 	}
 	free_forks(&actual);

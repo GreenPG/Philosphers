@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 12:53:50 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/25 15:49:11 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:16:46 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	free_forks(t_forks **forks)
 		return ;
 	tmp = *forks;
 	if (tmp->tab)
+	{
+		pthread_mutex_destroy(tmp->tab);
 		free(tmp->tab);
+	}
 	free(*forks);
 	*forks = NULL;
 	tmp = NULL;

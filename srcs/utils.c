@@ -6,11 +6,12 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:25:36 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/27 13:08:08 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/07 16:53:38 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
+#include <pthread.h>
 
 size_t	ft_strlen(const char *s)
 {
@@ -50,15 +51,26 @@ int	ft_atoi(const char *nptr)
 	return (ret);
 }
 
-struct timeval	get_set_starttime(int par)
+long long	get_set_time(int par)
 {
-	static struct timeval	start_time;
+	struct timeval			tmval;
+	static struct timeval	*start_time;
+	static pthread_mutex_t	mutex;
 
+	pthread_mutex_init(&mutex, NULL);
 	if (par == 0)
 	{
-		gettimeofday(&start_time, NULL);
-		return (start_time);
+		pthread_mutex_lock(&mutex);
+		if (!start_time)
+		{
+			start_time = malloc(sizeof(struct timeval));
+			gettimeofday(start_time, NULL);
+		}
+		pthread_mutex_unlock(&mutex);
+		return (start_time->tv_sec * 1000 + start_time->tv_usec / 1000);
 	}
-	else
-		return (start_time);
+	pthread_mutex_lock(&mutex);
+	gettimeofday(&tmval, NULL);
+	pthread_mutex_unlock(&mutex);
+	return (tmval.tv_sec * 1000 + tmval.tv_usec / 1000);
 }

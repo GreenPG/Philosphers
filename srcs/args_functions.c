@@ -6,25 +6,25 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:38:33 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/02/27 14:29:32 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:01:41 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 #include <string.h>
 
-static int	*init_forks_tab(int philo_nb )
+static pthread_mutex_t	*init_forks_tab(int philo_nb )
 {
-	int	*tab;
-	int	i;
+	pthread_mutex_t	*tab;
+	int				i;
 
-	tab = malloc(sizeof(int) * philo_nb);
+	tab = malloc(sizeof(pthread_mutex_t) * philo_nb);
 	if (!tab)
 		return (NULL);
 	i = 0;
 	while (i < philo_nb)
 	{
-		tab[i] = 0;
+		pthread_mutex_init(&tab[i], NULL);
 		i++;
 	}
 	return (tab);
