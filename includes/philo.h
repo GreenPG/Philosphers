@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:41:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/08 17:30:12 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:30:34 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-typedef enum e_state {start ,sleeping, thinking, eating, dead}	t_state;
+typedef enum e_state {start ,sleeping, thinking, eating, dead, take}	t_state;
 
 typedef struct s_forks {
 	int				philo_nb;
@@ -37,14 +37,26 @@ typedef struct s_philo {
 	pthread_mutex_t	*forks[2];
 }	t_philo;
 
+/*	main.c	*/
+
+void			change_status(enum e_state status, t_philo *data, long int time);
+
 /*	args_functions.c	*/
 
 t_forks			*init_forks(char *input);
 t_philo			**init_philos(char **av, int ac, t_forks *forks);
 
+/* 	forks.c		*/
+
+t_forks			*init_forks(char *input);
+
 /*	check_args.c	*/
 
 int				check_args(int ac, char **av);
+
+/*	life.c			*/
+
+void			*start_thd(void	*data);
 
 /*	utils.c				*/
 

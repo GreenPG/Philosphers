@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:25:36 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/08 12:55:05 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/09 15:16:51 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ long long	get_set_time(int par, t_philo *ph_data)
 {
 	struct timeval			tmval;
 	static struct timeval	start_time;
-	long long	time;
+	long long				time;
 
 	(void)ph_data;
 	if (par <= 1)
@@ -65,6 +65,7 @@ long long	get_set_time(int par, t_philo *ph_data)
 		return (0);
 	}
 	gettimeofday(&tmval, NULL);
-	time = (tmval.tv_sec - start_time.tv_sec) * 1000 + (tmval.tv_usec - start_time.tv_usec) / 1000;
+	time = (tmval.tv_sec - start_time.tv_sec) * 1000
+		+ (tmval.tv_usec - start_time.tv_usec) / 1000;
 	return (time);
 }

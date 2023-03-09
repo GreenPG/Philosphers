@@ -6,7 +6,7 @@
 #    By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/14 16:30:04 by gpasquet          #+#    #+#              #
-#    Updated: 2023/03/08 12:55:38 by gpasquet         ###   ########.fr        #
+#    Updated: 2023/03/09 17:33:14 by gpasquet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,11 @@ NAME =	philo
 
 SRCS =	srcs/main.c \
 		srcs/args_functions.c \
+		srcs/forks.c \
 		srcs/check_args.c \
 		srcs/utils.c \
-		srcs/free_functions.c
+		srcs/free_functions.c \
+		srcs/life.c
 
 OBJS =	${SRCS:.c=.o}
 
