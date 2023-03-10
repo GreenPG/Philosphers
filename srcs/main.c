@@ -6,30 +6,23 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:27:46 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/09 16:28:27 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/10 15:14:15 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-void	change_status(enum e_state status, t_philo *data, long int time)
+static void	*start_thd(void	*data)
 {
-	static pthread_mutex_t	mutex = PTHREAD_MUTEX_INITIALIZER;
+	t_philo			*ph_data;
+	long int		current_time;
+	long int		last_eat_t;
 
-	pthread_mutex_lock(&mutex);
-	if (status != take)
-		data->state = status;
-	if (status == take)
-		printf("\033[1;33m%li Philo %i has taken a fork\n\033[0m", time, data->id);
-	else if (status == sleeping)
-		printf("\033[1;36m%li Philo %i start to sleep\n\033[0m", time, data->id);
-	else if (status == eating)
-		printf("\033[1;32m%li Philo %i start to eat\n\033[0m", time, data->id);
-	else if (status == thinking)
-		printf("\033[1;35m%li Philo %i start to think\n\033[0m", time, data->id);
-	else
-		printf("\033[1;31m%li Philo %i died\n\033[0m", time - 1, data->id);
-	pthread_mutex_unlock(&mutex);
+	ph_data = data;
+	current_time = get_set_time(2, ph_data);
+	last_eat_t = current_time;
+	life_loop(ph_data, current_time, last_eat_t);
+	return (0);
 }
 
 static void	launcher(t_philo **philos, t_forks *forks, pthread_t *thd)

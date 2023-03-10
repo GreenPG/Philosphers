@@ -6,7 +6,7 @@
 #    By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 11:03:28 by gpasquet          #+#    #+#              #
-#    Updated: 2023/03/08 13:02:19 by gpasquet         ###   ########.fr        #
+#    Updated: 2023/03/10 13:38:08 by gpasquet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ $(TRUNNER): $(OBJS) $(TOBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(TOBJS) -o $(TRUNNER)
 
 #$(TOBJS):	
-#/	$(CC) $(CFLAGS) -c $(TSRCS) -o $(TOBJS)
+#	$(CC) $(CFLAGS) -c $(TSRCS) -o $(TOBJS)
 
 
 

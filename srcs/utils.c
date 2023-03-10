@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:25:36 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/09 15:16:51 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/10 13:39:35 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,24 @@ long long	get_set_time(int par, t_philo *ph_data)
 	time = (tmval.tv_sec - start_time.tv_sec) * 1000
 		+ (tmval.tv_usec - start_time.tv_usec) / 1000;
 	return (time);
+}
+
+void	change_status(enum e_state status, t_philo *data, long int time)
+{
+	static pthread_mutex_t	mutex = PTHREAD_MUTEX_INITIALIZER;
+
+	pthread_mutex_lock(&mutex);
+	if (status != take)
+		data->state = status;
+	if (status == take)
+		printf("\033[1;33m%li Philo %i has taken a fork\n\033[0m", time, data->id);
+	else if (status == sleeping)
+		printf("\033[1;36m%li Philo %i start to sleep\n\033[0m", time, data->id);
+	else if (status == eating)
+		printf("\033[1;32m%li Philo %i start to eat\n\033[0m", time, data->id);
+	else if (status == thinking)
+		printf("\033[1;35m%li Philo %i start to think\n\033[0m", time, data->id);
+	else
+		printf("\033[1;31m%li Philo %i died\n\033[0m", time - 1, data->id);
+	pthread_mutex_unlock(&mutex);
 }

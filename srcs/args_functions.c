@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:38:33 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/09 15:30:49 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:31:49 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ static void	init_values(t_philo **philos, char **av, int i,
 	philos[i]->t_sleep = ft_atoi(av[3]);
 	philos[i]->state = start;
 	philos[i]->time_mut = time_mut;
+	philos[i]->finish = 0;
 	if (av[4])
 		philos[i]->nb_eat = ft_atoi(av[4]);
+	else
+		philos[i]->nb_eat = 0;
 }
 
 static void	init_mutexs(t_philo **philos, t_forks *forks, int i)

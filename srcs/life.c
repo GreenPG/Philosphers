@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:27:26 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/09 17:11:21 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/10 15:16:14 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,31 @@ static void	starting_ph(t_philo *ph_data, long int *current_time,
 }
 
 static void	eating_ph(t_philo *ph_data, long int *current_time,
-	long int *last_change_t)
+	long int *last_change_t, int *eaten_times)
 {
 	change_status(sleeping, ph_data, *current_time);
 	pthread_mutex_unlock(ph_data->forks[0]);
 	pthread_mutex_unlock(ph_data->forks[1]);
 	*last_change_t = *current_time;
+	*eaten_times += 1;
+	if (*eaten_times == ph_data->nb_eat)
+		ph_data->finish = 1;
 }
 
-static void	life_loop(t_philo *ph_data, long int current_time,
-	long int last_eat_t)
+static void	sleeping_ph(t_philo *ph_data, long int *current_time,
+	long int *last_change_t)
+{
+	*last_change_t = *current_time;
+	change_status(thinking, ph_data, *current_time);
+}
+
+void	life_loop(t_philo *ph_data, long int current_time,
+		long int last_eat_t)
 {
 	long int		last_change_t;
+	int				eaten_times;
 
+	eaten_times = 0;
 	while (1)
 	{
 		current_time = get_set_time(2, ph_data);
@@ -77,25 +89,9 @@ static void	life_loop(t_philo *ph_data, long int current_time,
 			starting_ph(ph_data, &current_time, &last_change_t, &last_eat_t);
 		else if (ph_data->state == eating && (current_time - last_change_t)
 			>= ph_data->t_eat)
-			eating_ph(ph_data, &current_time, &last_change_t);
+			eating_ph(ph_data, &current_time, &last_change_t, &eaten_times);
 		else if (ph_data->state == sleeping && (current_time - last_change_t)
 			>= ph_data->t_sleep)
-		{
-			last_change_t = current_time;
-			change_status(thinking, ph_data, current_time);
-		}
+			sleeping_ph(ph_data, &current_time, &last_change_t);
 	}
-}
-
-void	*start_thd(void	*data)
-{
-	t_philo			*ph_data;
-	long int		current_time;
-	long int		last_eat_t;
-
-	ph_data = data;
-	current_time = get_set_time(2, ph_data);
-	last_eat_t = current_time;
-	life_loop(ph_data, current_time, last_eat_t);
-	return (0);
 }
