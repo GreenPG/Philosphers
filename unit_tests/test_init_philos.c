@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:40:33 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/10 14:30:46 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/13 14:52:09 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ TEST	ASSERT_PHILOS_EQ(t_philo **actual, char **args, t_forks *forks, int size)
 		else
 			ASSERT_EQ_FMT(0, actual[pos]->nb_eat, "%i");
 		ASSERT_EQ_FMT(0, actual[pos]->finish, "%i");
+		ASSERT_EQ_FMT(0, (int)actual[pos]->current_time, "%i");
+		ASSERT_EQ_FMT(0, (int)actual[pos]->last_eat_t, "%i");
+		ASSERT_EQ_FMT(0, pthread_mutex_lock(&actual[pos]->time_mut), "%i");
+		ASSERT_EQ_FMT(0, pthread_mutex_lock(&actual[pos]->ph_mut), "%i");
 		if (pos == ph_nb - 1)
 		{
 			ASSERT_EQ_FMT(&forks->tab[pos], actual[pos]->forks[0], "%p");

@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:41:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/10 15:13:35 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/13 16:34:26 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,21 @@ typedef struct s_philo {
 	int				t_sleep;
 	int				nb_eat;
 	int				finish;
-	pthread_mutex_t	time_mut;
+	int				end_mark;
+	long int		current_time;
+	long int		last_eat_t;
 	t_state			state;
+	pthread_mutex_t	ph_mut;
+	pthread_mutex_t	time_mut;
 	pthread_mutex_t	*forks[2];
 }	t_philo;
 
+typedef struct s_death {
+	t_philo		**philos;
+	int			nb_philo;
+	long int	t_die;
+	int			finished_ph;
+}	t_death;
 /*	main.c	*/
 
 /*	args_functions.c	*/
@@ -57,6 +67,11 @@ int				check_args(int ac, char **av);
 
 void			life_loop(t_philo *ph_data, long int current_time,
 					long int last_eat_t);
+
+/*	death.c		*/
+
+t_death	*init_death(t_philo **philos, int nb_philos);
+void	*death(void *data);
 
 /*	utils.c				*/
 

@@ -6,13 +6,13 @@
 #    By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/14 16:30:04 by gpasquet          #+#    #+#              #
-#    Updated: 2023/03/10 11:14:04 by gpasquet         ###   ########.fr        #
+#    Updated: 2023/03/13 16:57:44 by gpasquet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC =	clang
 
-CFLAGS =	-g -Werror -Wextra -Wall -pthread -I./includes 
+CFLAGS =	-g -Werror -Wextra -Wall -pthread -fsanitize=thread -I./includes 
 
 NAME =	philo	
 
@@ -22,7 +22,8 @@ SRCS =	srcs/main.c \
 		srcs/check_args.c \
 		srcs/utils.c \
 		srcs/free_functions.c \
-		srcs/life.c
+		srcs/life.c \
+		srcs/death.c
 
 OBJS =	${SRCS:.c=.o}
 

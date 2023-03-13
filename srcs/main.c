@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:27:46 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/10 15:14:15 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/13 16:42:25 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,12 @@ static void	*start_thd(void	*data)
 static void	launcher(t_philo **philos, t_forks *forks, pthread_t *thd)
 {
 	int			i;
+	pthread_t	death_thd;
+	t_death		*death_data;
 
+	death_data = init_death(philos, forks->philo_nb);
+	if (!death_data)
+		return ;
 	i = 0;
 	get_set_time(0, philos[0]);
 	while (i < forks->philo_nb)
@@ -41,9 +46,11 @@ static void	launcher(t_philo **philos, t_forks *forks, pthread_t *thd)
 		}
 		i++;
 	}
+	if (pthread_create(&death_thd, NULL, &death, death_data) == -1)
+		return ;
 }
 
-static void	end_thread(t_philo **philos, t_forks *forks, pthread_t *thd)
+static void	end_threads(t_philo **philos, t_forks *forks, pthread_t *thd)
 {
 	int	i;
 
@@ -92,6 +99,6 @@ int	main(int ac, char **av)
 		return (1);
 	thd = create_thd(philos, forks);
 	launcher(philos, forks, thd);
-	end_thread(philos, forks, thd);
+	end_threads(philos, forks, thd);
 	return (0);
 }
