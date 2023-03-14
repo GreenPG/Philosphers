@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:27:26 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/13 17:03:26 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/14 09:25:40 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	life_loop(t_philo *ph_data, long int current_time,
 	int				eaten_times;
 
 	eaten_times = 0;
-	while (1)
+	while (ph_data->end_mark != 1)
 	{
 		pthread_mutex_lock(&ph_data->ph_mut);
 		current_time = get_set_time(2, ph_data);

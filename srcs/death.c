@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:18:19 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/14 08:42:00 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/14 09:24:39 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,14 @@ void	*death(void	*data)
 			pthread_mutex_lock(&death_dt->philos[i]->ph_mut);
 			if (death_dt->philos[i]->finish == 1)
 				death_dt->finished_ph++;
+			pthread_mutex_unlock(&death_dt->philos[i]->ph_mut);
 			i++;
 		}
 		if (death_dt->finished_ph == death_dt->nb_philo)
 		{
-			pthread_mutex_unlock(&death_dt->philos[i]->ph_mut);
 			eat_end(death_dt);
 			exit(0);
 		}
-		pthread_mutex_unlock(&death_dt->philos[i - 1]->ph_mut);
 		death_dt->finished_ph = 0;
 	}
 }
