@@ -6,13 +6,14 @@
 #    By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/14 16:30:04 by gpasquet          #+#    #+#              #
-#    Updated: 2023/03/13 16:57:44 by gpasquet         ###   ########.fr        #
+#    Updated: 2023/03/14 08:56:12 by gpasquet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC =	clang
 
-CFLAGS =	-g -Werror -Wextra -Wall -pthread -fsanitize=thread -I./includes 
+CFLAGS = 	-g -Werror -Wextra -Wall -pthread -fsanitize=thread -I./includes 
+#CFLAGS = -g -Werror -Wextra -Wall -pthread -I./includes
 
 NAME =	philo	
 

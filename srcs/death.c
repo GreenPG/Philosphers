@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:18:19 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/13 17:02:09 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/14 08:42:00 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	*death(void	*data)
 			eat_end(death_dt);
 			exit(0);
 		}
-		pthread_mutex_lock(&death_dt->philos[i]->ph_mut);
+		pthread_mutex_unlock(&death_dt->philos[i - 1]->ph_mut);
 		death_dt->finished_ph = 0;
 	}
 }
