@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:41:52 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/13 16:34:26 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/14 14:22:45 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_philo {
 	long int		last_eat_t;
 	t_state			state;
 	pthread_mutex_t	ph_mut;
-	pthread_mutex_t	time_mut;
 	pthread_mutex_t	*forks[2];
 }	t_philo;
 
@@ -77,7 +76,7 @@ void	*death(void *data);
 
 int				ft_atoi(const char *nptr);
 size_t			ft_strlen(const char *s);
-long long		get_set_time(int par, t_philo *ph_data);
+long long		get_set_time(int par);
 void			change_status(enum e_state status, t_philo *data, long int time);
 
 /*	free_functions.c	*/

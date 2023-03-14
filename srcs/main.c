@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:27:46 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/13 16:42:25 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/14 17:01:28 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	*start_thd(void	*data)
 	long int		last_eat_t;
 
 	ph_data = data;
-	current_time = get_set_time(2, ph_data);
+	current_time = get_set_time(2);
 	last_eat_t = current_time;
 	life_loop(ph_data, current_time, last_eat_t);
 	return (0);
@@ -35,7 +35,7 @@ static void	launcher(t_philo **philos, t_forks *forks, pthread_t *thd)
 	if (!death_data)
 		return ;
 	i = 0;
-	get_set_time(0, philos[0]);
+	get_set_time(0);
 	while (i < forks->philo_nb)
 	{
 		if (pthread_create(&thd[i], NULL, &start_thd, philos[i]) == -1)

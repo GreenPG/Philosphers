@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:25:36 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/10 13:39:35 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:58:44 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,12 @@ int	ft_atoi(const char *nptr)
 	return (ret);
 }
 
-long long	get_set_time(int par, t_philo *ph_data)
+long long	get_set_time(int par)
 {
 	struct timeval			tmval;
 	static struct timeval	start_time;
 	long long				time;
 
-	(void)ph_data;
 	if (par <= 1)
 	{
 		if (par == 0)
@@ -86,6 +85,6 @@ void	change_status(enum e_state status, t_philo *data, long int time)
 	else if (status == thinking)
 		printf("\033[1;35m%li Philo %i start to think\n\033[0m", time, data->id);
 	else
-		printf("\033[1;31m%li Philo %i died\n\033[0m", time - 1, data->id);
+		printf("\033[1;31m%li Philo %i died\n\033[0m", time, data->id);
 	pthread_mutex_unlock(&mutex);
 }

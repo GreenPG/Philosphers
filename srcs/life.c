@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:27:26 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/14 09:25:40 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:53:51 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static void	thinking_ph(t_philo *ph_data, long int *current_time,
 	long int *last_change_t, long int *last_eat_t)
 {
 	pthread_mutex_lock(ph_data->forks[0]);
-	*current_time = get_set_time(2, ph_data);
+	*current_time = get_set_time(2);
 	change_status(take, ph_data, *current_time);
 	pthread_mutex_lock(ph_data->forks[1]);
-	*current_time = get_set_time(2, ph_data);
+	*current_time = get_set_time(2);
 	*last_change_t = *current_time;
 	*last_eat_t = *current_time;
 	change_status(take, ph_data, *current_time);
@@ -33,10 +33,10 @@ static void	starting_ph(t_philo *ph_data, long int *current_time,
 	{
 		*last_change_t = *current_time;
 		pthread_mutex_lock(ph_data->forks[0]);
-		*current_time = get_set_time(2, ph_data);
+		*current_time = get_set_time(2);
 		change_status(take, ph_data, *current_time);
 		pthread_mutex_lock(ph_data->forks[1]);
-		*current_time = get_set_time(2, ph_data);
+		*current_time = get_set_time(2);
 		*last_eat_t = *current_time;
 		change_status(take, ph_data, *current_time);
 		change_status(eating, ph_data, *current_time);
@@ -75,16 +75,16 @@ void	life_loop(t_philo *ph_data, long int current_time,
 	int				eaten_times;
 
 	eaten_times = 0;
-	while (ph_data->end_mark != 1)
+	while (ph_data->end_mark != 1 || ph_data->state != dead)
 	{
 		pthread_mutex_lock(&ph_data->ph_mut);
-		current_time = get_set_time(2, ph_data);
-		if ((current_time - last_eat_t) > ph_data->t_die)
+		current_time = get_set_time(2);
+	/*	if ((current_time - last_eat_t) > ph_data->t_die)
 		{
 			change_status(dead, ph_data, current_time);
 			break ;
 		}
-		else if (ph_data->state == thinking)
+		else*/ if (ph_data->state == thinking)
 			thinking_ph(ph_data, &current_time, &last_change_t, &last_eat_t);
 		else if (ph_data->state == start)
 			starting_ph(ph_data, &current_time, &last_change_t, &last_eat_t);

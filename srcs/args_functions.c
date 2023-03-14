@@ -6,21 +6,19 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:38:33 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/13 14:57:27 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/14 14:23:40 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-static void	init_values(t_philo **philos, char **av, int i,
-	pthread_mutex_t time_mut)
+static void	init_values(t_philo **philos, char **av, int i)
 {
 	philos[i]->id = i + 1;
 	philos[i]->t_die = ft_atoi(av[1]);
 	philos[i]->t_eat = ft_atoi(av[2]);
 	philos[i]->t_sleep = ft_atoi(av[3]);
 	philos[i]->state = start;
-	philos[i]->time_mut = time_mut;
 	philos[i]->finish = 0;
 	philos[i]->current_time = 0;
 	philos[i]->last_eat_t = 0;
@@ -42,7 +40,6 @@ static void	init_mutexs(t_philo **philos, t_forks *forks, int i)
 		philos[i]->forks[0] = &forks->tab[i];
 		philos[i]->forks[1] = &forks->tab[i + 1];
 	}
-	pthread_mutex_init(&philos[i]->time_mut, NULL);
 	pthread_mutex_init(&philos[i]->ph_mut, NULL);
 }
 
@@ -61,7 +58,7 @@ static void	init_philo_loop(t_philo **philos, t_forks *forks, char **av)
 			free_philos(&philos, forks->philo_nb);
 			return ;
 		}
-		init_values(philos, av, i, time_mut);
+		init_values(philos, av, i);
 		init_mutexs(philos, forks, i);
 		i++;
 	}

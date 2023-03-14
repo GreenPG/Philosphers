@@ -6,7 +6,7 @@
 /*   By: gpasquet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:01:11 by gpasquet          #+#    #+#             */
-/*   Updated: 2023/03/13 16:34:45 by gpasquet         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:39:37 by gpasquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ TEST	ASSERT_DEATH_EQ(t_death *actual, t_philo **ph) {
 	int	i = 0;
 
 	ASSERT_EQ_FMT(4, actual->nb_philo, "%i");
-	ASSERT_EQ_FMT(0, (int)actual->t_die, "%i");
+	ASSERT_EQ_FMT(300, (int)actual->t_die, "%i");
 	ASSERT_EQ_FMT(0, actual->finished_ph, "%i");
 	while (i < actual->nb_philo)
 	{
